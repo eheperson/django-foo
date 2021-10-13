@@ -1,0 +1,9 @@
+#
+#
+# ignoring pytohn virtual environment dir
+/venv/
+#
+# ignoring Mac OS files
+/.DS_Store/
+#
+#
