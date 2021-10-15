@@ -18,6 +18,13 @@ class PostModelSerializer(serializers.ModelSerializer):
             model : Which model will be serialized 
             field : which fields you want to serialize(fields of model)
     """
+
+    # linking settings 
+    url = serializers.HyperlinkedIdentityField(
+        view_name='post:api-post-detail', # view_name = 'namespace:name' >> namespace:from core.urls.py, name:from ./urls.py
+        lookup_field='slug' # According to which field will the linking be done?
+    )
+
     class Meta:
          model=Post  
          fields =[
@@ -26,9 +33,11 @@ class PostModelSerializer(serializers.ModelSerializer):
              'title',
              'content',
              'img',
-             'slug',
+             'url', # before the linking, that string was 'slug'
              'created' 
          ]
+    
+
 
 class PostModelUpdateCreateSerializer(serializers.ModelSerializer):
     class Meta:
