@@ -75,7 +75,7 @@ class PostModelUpdateCreateSerializer(serializers.ModelSerializer):
     #     to use validation method we need override it also 
     #     but things are some different for that case 
     #     there is seperated validation functions for each field in model defined in models.py 
-
+    
     #     for example : 
 
     #         for the validate 'title'  field at the models.Post class  
@@ -88,15 +88,15 @@ class PostModelUpdateCreateSerializer(serializers.ModelSerializer):
     #     return value
 
     
-    def validate(self, attrs):
-        """ 
-        for example validate_title validates only the title field in the models.Post class
+    # def validate(self, attrs):
+    #     """ 
+    #     for example validate_title validates only the title field in the models.Post class
 
-        but alternativelly there is another validation function which takes all attributes in the class
+    #     but alternativelly there is another validation function which takes all attributes in the class
 
 
-        and that bitch function is what we are talking about 
-        """
-        if attrs["title"] == "enivicivokki":
-             raise serializers.ValidationError("bu olmaz")
-        return attrs
+    #     and that bitch function is what we are talking about 
+    #     """
+    #     if attrs["title"] == "enivicivokki":
+    #          raise serializers.ValidationError("bu olmaz")
+    #     return attrs
