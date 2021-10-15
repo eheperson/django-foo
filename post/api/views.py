@@ -16,6 +16,8 @@ from .permissions import IsOwner
 
 from rest_framework.filters import SearchFilter, OrderingFilter
 
+from .paginations import PostPagination
+
 
 class PostListAPIView(ListAPIView):
     serializer_class = PostSerializer 
@@ -58,6 +60,8 @@ class PostListAPIView(ListAPIView):
     #      because of the -
 
 
+    # that is the example of how we use pagination_class (by overriding)
+    pagination_class = PostPagination
 
     def get_queryset(self):
         """ 
