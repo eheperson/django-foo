@@ -11,6 +11,9 @@ from post.models import Post
 
 from rest_framework.permissions import (IsAdminUser, IsAuthenticated)
 
+#custom permissions
+from .permissions import IsOwner
+
 class PostListAPIView(ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer 
@@ -31,6 +34,7 @@ class PostUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Post.objects.all() 
     serializer_class = PostModelUpdateCreateSerializer 
     lookup_field = 'slug' 
+    permission_classes = [IsOwner]
 
     def perform_update (self, serializer ):
         serializer.save(modified_by = self.request.user)
@@ -39,11 +43,17 @@ class PostDeleteAPIView(DestroyAPIView):
     queryset = Post.objects.all() 
     serializer_class = PostModelSerializer 
     lookup_field = 'slug' 
+    permission_classes = [IsOwner]
+
 
 class PostCreateAPIView(CreateAPIView):
     queryset = Post.objects.all() 
     serializer_class = PostModelUpdateCreateSerializer 
-    permission_classes =[IsAuthenticated]
-    
-    def perform_create(self, serializer ):
-        serializer.save(user = self.request.user)
+    permission_classes =[IsAuthenticated] # if the user is authenticated
+    # permission_classes =[IsAuthenticated, IsAdminUser] # if the user is authenticated and Admin (not or, and )
+
+    # we will override a rest_framework serializers create func
+    # so we do not need to perform_create here
+    # check the serializers.py PostModelUpdateCreateSerializer class
+    # def perform_create(self, serializer ):
+    #     serializer.save(user = self.request.user)
