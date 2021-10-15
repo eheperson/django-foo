@@ -25,10 +25,27 @@ class PostModelSerializer(serializers.ModelSerializer):
         lookup_field='slug' # According to which field will the linking be done?
     )
 
+
+
+    username = serializers.SerializerMethodField(method_name='username_new')
+    # if we gave the method_name argument to the serializers.SerializerMethodField
+    # probably we will need to define that method as below :
+
+    # of course there is alternative way to perform same method 
+    # if we define our username without any parameter like below : 
+    #       username = serializers.SerializerMethodField()
+    # we just need override o function like below :  
+    #
+        # def get_username(self,obj):
+        #     return str(obj.user.username)
+    # and there şs nothing to do
+
+
+
     class Meta:
          model=Post  
          fields =[
-             'user',
+             'username', # before defining 'username' variable at top, that string var 'user'
              'modified_by',
              'title',
              'content',
@@ -36,6 +53,12 @@ class PostModelSerializer(serializers.ModelSerializer):
              'url', # before the linking, that string was 'slug'
              'created' 
          ]
+
+    def username_new(self,obj):
+        """ 
+        obj parameter corresponds to the serialized object
+        """
+        return str(obj.user.username)
     
 
 
