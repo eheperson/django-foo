@@ -14,9 +14,60 @@ from rest_framework.permissions import (IsAdminUser, IsAuthenticated)
 #custom permissions
 from .permissions import IsOwner
 
+from rest_framework.filters import SearchFilter, OrderingFilter
+
+
 class PostListAPIView(ListAPIView):
-    queryset = Post.objects.all()
     serializer_class = PostSerializer 
+    # queryset = Post.objects.all()
+
+    filter_backends = [SearchFilter] #we will apply search filter, that is the why we used SearchFilter
+    
+    search_fields = ['title'] # We specify how we will search.
+    # to use search_fields : 
+        # http://127.0.0.1:8000/api/post/list?search=ehe
+        #
+        # that api end poind will return all Posts have "ehe" string in their title
+    # another example : 
+    #     search_fields = ['title', 'content'] # We specify how we will search.
+    #
+    #     if we go to :
+    #         http://127.0.0.1:8000/api/post/list?search=ehe
+    #
+    #     that api end poind will return all Posts have "ehe" string in their title or in their content
+
+
+
+
+    # filter_backends = [SearchFilter, OrderingFilter] #we will apply search filter, that is the why we used SearchFilter
+    # if we use OrderingFilter class : 
+    #     and visit the url : 
+    #         http://127.0.0.1:8000/api/post/list?search=ehe&ordering=title 
+
+    #     that api end poind will return all Posts have "ehe" string in their title or in their content
+
+    #     and will order them according to their titles (maybe alphabetic order ???)
+
+    #         http://127.0.0.1:8000/api/post/list?search=ehe&ordering=user 
+
+    #     ordering will be according to the user field at the Post
+
+    #         http://127.0.0.1:8000/api/post/list?search=ehe&ordering=-user 
+
+    #     ordering will be reverse according to the user field at the Post
+    #      because of the -
+
+
+
+    def get_queryset(self):
+        """ 
+            filtering query set 
+
+            purpose is query the post which are not draft
+            (do not show drafts, list only posts)
+        """
+        queryset = Post.objects.filter(draft=False)
+        return queryset
 
 class PostListAPIViewModel(ListAPIView):
     queryset = Post.objects.all()
@@ -55,5 +106,6 @@ class PostCreateAPIView(CreateAPIView):
     # we will override a rest_framework serializers create func
     # so we do not need to perform_create here
     # check the serializers.py PostModelUpdateCreateSerializer class
-    # def perform_create(self, serializer ):
-    #     serializer.save(user = self.request.user)
+    # edit : uncommented because crete function is commented at serializers.PostModelUpdateCreateSerializer
+    def perform_create(self, serializer ):
+        serializer.save(user = self.request.user)

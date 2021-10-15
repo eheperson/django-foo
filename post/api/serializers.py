@@ -50,21 +50,27 @@ class PostModelUpdateCreateSerializer(serializers.ModelSerializer):
     #     """
     #     pass
 
-    def create(self, validated_data):
-        return Post.objects.create(user =self.context["request"].user, **validated_data)
 
-    def update(self, instance, validated_data):
-        """"
-        we can tampering data before update if we wish
 
-        we just need to override that update function as follow 
-        """
-        instance.title = validated_data.get('title', instance.title)
-        # instance.content = validated_data.get('content', instance.content)
-        instance.content = "enivicivokki" # an example of how to manipulate data before update
-        instance.image = validated_data.get('image', instance.image)
-        instance.save() # do not forget save after update
-        return instance
+
+    # def create(self, validated_data):
+    #     return Post.objects.create(user =self.context["request"].user, **validated_data)
+
+
+
+
+    # def update(self, instance, validated_data):
+    #     """"
+    #     we can tampering data before update if we wish
+
+    #     we just need to override that update function as follow 
+    #     """
+    #     instance.title = validated_data.get('title', instance.title)
+    #     # instance.content = validated_data.get('content', instance.content)
+    #     instance.content = "enivicivokki" # an example of how to manipulate data before update
+    #     instance.image = validated_data.get('image', instance.image)
+    #     instance.save() # do not forget save after update
+    #     return instance
 
 
 
@@ -86,6 +92,8 @@ class PostModelUpdateCreateSerializer(serializers.ModelSerializer):
     #     if value == "ehe":
     #         raise serializers.ValidationError("eheni sikmiim, adam gibi bişi yaz. ")
     #     return value
+
+
 
     
     # def validate(self, attrs):
