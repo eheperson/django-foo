@@ -16,8 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# that imports are required for staticfiles and mediafiles
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
     path('api/post/', include('post.api.urls'), namespace='post'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# do not forget define a MEDIA_URL variable in the settings.py
