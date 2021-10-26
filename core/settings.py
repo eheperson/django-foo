@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets.apps.SnippetsConfig',
     'post.apps.PostConfig',
+    'comment.apps.CommentConfig',
 ]
 
 MIDDLEWARE = [

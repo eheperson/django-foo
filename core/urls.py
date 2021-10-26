@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
     path('api/post/', include('post.api.urls', namespace='post')),
+    path('api/comment/', include('comment.api.urls', namespace='comment')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

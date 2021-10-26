@@ -23,9 +23,9 @@ class PostListAPIView(ListAPIView):
     serializer_class = PostSerializer 
     # queryset = Post.objects.all()
 
-    filter_backends = [SearchFilter] #we will apply search filter, that is the why we used SearchFilter
+    filter_backends = [SearchFilter, OrderingFilter] #we will apply search filter, that is the why we used SearchFilter
     
-    search_fields = ['title'] # We specify how we will search.
+    search_fields = ['title', 'content'] # We specify how we will search.
     # to use search_fields : 
         # http://127.0.0.1:8000/api/post/list?search=ehe
         #
