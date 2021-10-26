@@ -10,5 +10,5 @@ urlpatterns = [
     path('list/', views.CommentListAPIView.as_view(), name="comment-list"),
     path('delete/<pk>', views.CommentDeleteAPIView.as_view(), name="comment-delete"),
     path('update/<pk>', views.CommentUpdateAPIView.as_view(), name="comment-update"),
-     
+    path('edit/<pk>', views.CommentEditAPIView.as_view(), name="comment-edit"),
 ]

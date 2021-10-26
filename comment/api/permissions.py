@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission
 class IsOwner(BasePermission):
     """ 
     has_object_permission : 
-    has_permission :  request timi ne olursa olsun(post,get,delete vs) ilk olarak has permission çalışır
+    has_permission :  request tipi ne olursa olsun(post,get,delete vs) ilk olarak has permission çalışır
 
     fakat, delete metodu yazdığımızda, api ucu genellikle sadece delete requeste izin verir.
         temelde sayfaya yapılan her istek get dir.

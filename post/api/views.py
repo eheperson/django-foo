@@ -18,6 +18,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from .paginations import PostPagination
 
+from rest_framework.mixins import ListModelMixin # CreateModelMixin create() diye bir fonksiyon sağlar
+
 
 class PostListAPIView(ListAPIView):
     serializer_class = PostSerializer 
@@ -113,3 +115,25 @@ class PostCreateAPIView(CreateAPIView):
     # edit : uncommented because crete function is commented at serializers.PostModelUpdateCreateSerializer
     def perform_create(self, serializer ):
         serializer.save(user = self.request.user)
+
+
+# This example is implementation of using ListModelMixin with create post view
+#
+# class PostCreateAPIView(
+#     ListModelMixin, 
+#     CreateAPIView,
+# ):
+#     queryset = Post.objects.all() 
+#     serializer_class = PostModelUpdateCreateSerializer 
+#     permission_classes =[IsAuthenticated] # if the user is authenticated
+#     # permission_classes =[IsAuthenticated, IsAdminUser] # if the user is authenticated and Admin (not or, and )
+
+#     # we will override a rest_framework serializers create func
+#     # so we do not need to perform_create here
+#     # check the serializers.py PostModelUpdateCreateSerializer class
+#     # edit : uncommented because crete function is commented at serializers.PostModelUpdateCreateSerializer
+#     def perform_create(self, serializer ):
+#         serializer.save(user = self.request.user)
+
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
