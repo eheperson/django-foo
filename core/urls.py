@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('snippets.urls')),
     path('api/post/', include('post.api.urls', namespace='post')),
     path('api/comment/', include('comment.api.urls', namespace='comment')),
+    path('lab/', include('lab.urls', namespace='lab')),
+
 
 ]
 

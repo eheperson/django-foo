@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'snippets.apps.SnippetsConfig',
     'post.apps.PostConfig',
     'comment.apps.CommentConfig',
+    'lab.apps.LabConfig',
 ]
 
 MIDDLEWARE = [
