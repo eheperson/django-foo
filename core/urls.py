@@ -20,12 +20,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from djfilterTest.views import BootstrapFilterView
+# from djfilterTest.views import BootstrapFilterView
+
+from rest_framework_simplejwt import views as jwt_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
     path('api/post/', include('post.api.urls', namespace='post')),
     path('api/comment/', include('comment.api.urls', namespace='comment')),
+
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
     path('lab/', include('lab.urls', namespace='lab')),
     path('djfiltertest/', include('djfilterTest.urls', namespace='djfiltertest')),
     path('api/favourite/', include('favourite.api.urls', namespace='favourite')),

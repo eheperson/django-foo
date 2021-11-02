@@ -10,7 +10,9 @@ from rest_framework.generics import(
 
 )
 
-
+from rest_framework.permissions import(
+    IsAuthenticated,
+)
 
 from .paginations import (
     FavouritePagination,
@@ -32,6 +34,7 @@ class FavouriteListCreateAPIView(ListCreateAPIView):
     # queryset = Favourite.objects.all()
     serializer_class = FavouriteCreateListAPISerializer
     pagination_class = FavouritePagination
+    permission_class = [IsAuthenticated]
 
     def get_queryset(self):
         return  Favourite.objects.filter(user = self.request.user)
