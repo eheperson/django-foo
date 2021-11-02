@@ -1,5 +1,5 @@
 
-from rest_framework import(
+from rest_framework.serializers import(
     ModelSerializer,
     SerializerMethodField,
 )

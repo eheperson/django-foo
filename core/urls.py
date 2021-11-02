@@ -20,15 +20,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from djfilterTest.views import BootstrapFilterView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('snippets.urls')),
     path('api/post/', include('post.api.urls', namespace='post')),
     path('api/comment/', include('comment.api.urls', namespace='comment')),
     path('lab/', include('lab.urls', namespace='lab')),
-
-
+    path('djfiltertest/', include('djfilterTest.urls', namespace='djfiltertest')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-# do not forget define a MEDIA_URL variable in the settings.py
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # do not forget define a MEDIA_URL variable in the settings.py
