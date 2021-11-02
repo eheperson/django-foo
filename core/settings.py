@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comment.apps.CommentConfig',
     'lab.apps.LabConfig',
     'djfilterTest.apps.DjfiltertestConfig',
+    'favourite.apps.FavouriteConfig',
 
 ]
 

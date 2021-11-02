@@ -28,6 +28,8 @@ urlpatterns = [
     path('api/comment/', include('comment.api.urls', namespace='comment')),
     path('lab/', include('lab.urls', namespace='lab')),
     path('djfiltertest/', include('djfilterTest.urls', namespace='djfiltertest')),
+    path('api/favourite/', include('favourite.api.urls', namespace='favourite')),
+
 ]
 
 if settings.DEBUG:
