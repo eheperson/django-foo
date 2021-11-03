@@ -36,6 +36,8 @@ urlpatterns = [
     path('lab/', include('lab.urls', namespace='lab')),
     path('djfiltertest/', include('djfilterTest.urls', namespace='djfiltertest')),
     path('api/favourite/', include('favourite.api.urls', namespace='favourite')),
+    path('api/user/', include('account.api.urls', namespace='account')),
+
 
 ]
 

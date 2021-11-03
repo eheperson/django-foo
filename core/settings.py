@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'lab.apps.LabConfig',
     'djfilterTest.apps.DjfiltertestConfig',
     'favourite.apps.FavouriteConfig',
+    'account.apps.AccountConfig',
 
 ]
 
