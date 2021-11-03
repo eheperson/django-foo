@@ -25,9 +25,15 @@ from django.contrib.auth.models import (
     User,
 )
 
+from account.api.throttles import RegisterThrottle
+
 from .permissions import NotAuthenticated
 
 from django.contrib.auth import update_session_auth_hash
+
+from .throttles import (
+    RegisterThrottle,
+)
 
 class ProfileView(RetrieveUpdateAPIView):
     permissions_classes = IsAuthenticated
@@ -86,3 +92,4 @@ class CreateUserView(CreateAPIView):
     model = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [NotAuthenticated]
+    throttle_classes = [RegisterThrottle]

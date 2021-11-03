@@ -32,6 +32,18 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+
+    'DEFAULT_THROTTLE_CLASSES':{
+        'rest_framework.throttling.ScopeRateThrottle' # after this setting, we can define throttle_scope = 'mahmut'
+                                                      # in any view.
+                                                      # do no forget to add the scope in DEFAULT_THROTTLE_RATES
+    },
+
+    'DEFAULT_THROTTLE_RATES': {
+        'registerthrottle': '5/min', # 5 request per hour
+        'registerthrottleAnon': '2/min', # 5 request per hour
+        'registerthrottleUser': '5/hour', # 5 request per hour
+    }
 }
 
 # Increasing lifetime of the access token
