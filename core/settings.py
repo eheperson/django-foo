@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'django_filters',
     'snippets.apps.SnippetsConfig',
     'post.apps.PostConfig',
     'comment.apps.CommentConfig',
@@ -68,6 +69,9 @@ INSTALLED_APPS = [
     'djfilterTest.apps.DjfiltertestConfig',
     'favourite.apps.FavouriteConfig',
     'account.apps.AccountConfig',
+    'catalog.apps.CatalogConfig'
+    'testapi.apps.TestapiConfig',
+    'todo.apps.TodoConfig'
 
 ]
 
