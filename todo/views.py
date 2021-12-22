@@ -16,7 +16,7 @@ def submit(request):
     obj = Todo()
     obj.title = request.GET['title']
     obj.description = request.GET['description']
-    obj.priority = request.GET['priority']
+    obj.priority = request.GET['priority']  
     obj.save()
     mydictionary = {
         "alltodos" : Todo.objects.all()

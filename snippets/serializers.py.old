@@ -3,8 +3,11 @@ from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 
 
 class SnippetSerializer(serializers.Serializer):
-    """
-    create() and update() methods define are created or modified when calling serializer.save()
+    """ 
+    Our SnippetSerializer class is replicating a lot of information that's also contained in the Snippet model. 
+
+    The create() and update() methods define how fully fledged instances are created or 
+    modified when calling serializer.save()
     """
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(required=False, allow_blank=True, max_length=100)
@@ -31,8 +34,16 @@ class SnippetSerializer(serializers.Serializer):
         instance.save()
         return instance
 
-
 class SnippetModelSerializer(serializers.ModelSerializer):
+    """ 
+    Refactoring our serializer using the ModelSerializer class.
+
+    It's important to remember that ModelSerializer classes don't do anything particularly magical, 
+    they are simply a shortcut for creating serializer classes:
+
+        - An automatically determined set of fields.
+        - Simple default implementations for the create() and update() methods.
+    """
     class Meta:
         model = Snippet
         fields = ['id', 'title', 'code', 'linenos', 'language', 'style']

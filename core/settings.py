@@ -69,9 +69,12 @@ INSTALLED_APPS = [
     'djfilterTest.apps.DjfiltertestConfig',
     'favourite.apps.FavouriteConfig',
     'account.apps.AccountConfig',
-    'catalog.apps.CatalogConfig'
+    'catalog.apps.CatalogConfig',
     'testapi.apps.TestapiConfig',
-    'todo.apps.TodoConfig'
+    'todo.apps.TodoConfig',
+    'tutorial.apps.TutorialConfig',
+
+
 
 ]
 

@@ -10,6 +10,9 @@ from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 
 
+# request.POST : Only handles form data.  Only works for 'POST' method.
+# request.data : Handles arbitrary data.  Works for 'POST', 'PUT' and 'PATCH' methods.
+
 # We want to be able to POST to this view from clients that won't have a CSRF token we need to mark the view as csrf_exempt. 
 # This isn't something that you'd normally want to do, and REST framework views actually use more sensible behavior than this, 
 # but it'll do for our purposes right now.
@@ -23,7 +26,7 @@ def snippet_list(request):
         serializer = SnippetSerializer(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
+    elif request.method == 'POST': 
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
