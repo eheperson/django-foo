@@ -221,3 +221,41 @@ python manage.py migrate
 
 Django will choose the first static file it finds whose name matches, and if you had a static file with the same name in a different application, Django would be unable to distinguish between them. We need to be able to point Django at the right one, and the best way to ensure this is by namespacing them. That is, by putting those static files inside another directory named for the application itself.
 > Within the static directory you have just created, create another directory called polls and within that create a file called style.css. In other words, your stylesheet should be at `polls/static/polls/style.css`.
+
+
+### Django Rest Framework
+
+```
+pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering support
+pip install pygments  # We'll be using this for the code highlighting
+```
+
+```
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
+
+If you're intending to use the browsable API you'll probably also want to add REST framework's login and logout views.\
+Add the following to your root urls.py file.
+```
+urlpatterns = [
+    ...
+    path('api-auth/', include('rest_framework.urls'))
+]
+```
+
+Any global settings for a REST framework API are kept in a single configuration dictionary named `REST_FRAMEWORK`.\ 
+Start off by adding the following to your `settings.py` module:
+```
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+```

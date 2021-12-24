@@ -15,14 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from drfQuickStart import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
+    # Wire up our API using automatic URL routing.
+    path('', include(router.urls)),
+    # Additionally, we include login URLs for the browsable API.
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
+    # url for admin page
     path('admin/', admin.site.urls),
+
+    # urls for apps
     path('polls/', include('polls.urls')),
     path('catalog/', include('catalog.urls')),
     path('bookstore/', include('bookStore.urls')),
     path('todo/', include('todo.urls')),
 
-
-
+    # urls for drf aps
+    path('', include('snippets.urls')),
 ]
+

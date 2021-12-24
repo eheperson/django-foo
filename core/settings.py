@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     # required external apps
     'rest_framework',
 
-    # our apps
-    # 'drfTutorial.apps.DrftutorialConfig',
+    # apps
     'polls.apps.PollsConfig',  
     'catalog.apps.CatalogConfig',
     'bookStore.apps.BookstoreConfig',
     'todo.apps.TodoConfig',
+
+    # drf apps
+    'drfQuickStart.apps.DrfquickstartConfig',
+    'snippets.apps.SnippetsConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +136,16 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# global setting for django rest framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+
+    # To enable pagination
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
