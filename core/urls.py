@@ -24,7 +24,8 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     # Wire up our API using automatic URL routing.
-    path('', include(router.urls)),
+    path('api', include(router.urls)),
+
     # Additionally, we include login URLs for the browsable API.
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
@@ -36,6 +37,8 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('bookstore/', include('bookStore.urls')),
     path('todo/', include('todo.urls')),
+    path('', include('app.urls')),
+
 
     # urls for drf aps
     path('', include('snippets.urls')),
