@@ -36,8 +36,19 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('bookstore/', include('bookStore.urls')),
     path('todo/', include('todo.urls')),
+    path('blog/', include('blog.urls')),
+
 
     # urls for drf aps
-    path('', include('snippets.urls')),
+    # path('', include('snippets.urls')),
 ]
 
+
+
+# Serving Media files >>> for development only, check the django docsfor production
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

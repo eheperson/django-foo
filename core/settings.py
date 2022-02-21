@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,12 +42,14 @@ INSTALLED_APPS = [
 
     # required external apps
     'rest_framework',
+    'crispy_forms',
 
     # apps
     'polls.apps.PollsConfig',  
     'catalog.apps.CatalogConfig',
     'bookStore.apps.BookstoreConfig',
     'todo.apps.TodoConfig',
+    'blog.apps.BlogConfig',
 
     # drf apps
     'drfQuickStart.apps.DrfquickstartConfig',
@@ -67,7 +71,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/blog')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +83,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
@@ -130,16 +135,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-import os
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-
 # Add these new lines
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# settings for media files
+# MEDIA_ROOT is the path to the root directory where the files are getting stored.
+# BASE_DIR : base directory of the project
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+#
+# MEDIA_URL is the URL that will serve the media files.
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -158,3 +175,20 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+# Settings for crispy_form app (this app is third party app)
+CRISPY_TEMPLATE_PACK = 'bootstrap4' # bootstrap5 does not working
+
+# redirect after login
+# uncommet this line if you do not have a 'http://127.0.0.1:8000/accounts/profile/' page
+LOGIN_REDIRECT_URL = 'blog:blog-home'
+LOGIN_URL = 'blog:blog-login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get('barannkuzu@gmail.com')
+# EMAIL_HOST_PASSWORD = os.environ.get('rageAgainstTheMachine.13')
+EMAIL_HOST_USER = 'barannkuzu@gmail.com'
+EMAIL_HOST_PASSWORD = 'grywgljnxfzlonlk'

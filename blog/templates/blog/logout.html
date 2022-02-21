@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+
+{% block page-content %}
+    <div class=content-section>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a  href="{% url 'blog:blog-login' %}">
+                    Log In Again !
+                </a>
+            </small>
+        </div>
+    </div>
+{% endblock %}
