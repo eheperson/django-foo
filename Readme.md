@@ -9,83 +9,40 @@ pip install django
 pip install djangorestframework
 ```
 
-## Start
+## Basic Introduction
 
-### Basic Introduction
-
-> This tutorial will flow according to official django tutorials.
-
-Start a django project
-
-```
-# django-admin startproject <project_name> <dir_to_project_be_initialized>
-# in our case :
-django-admin startproject core .
-```
-
-Let’s verify your Django project works :
-
-```
-# By default, the runserver command starts the development server on the internal IP at port 8000
-python manage.py runserver
-
-# If you want to change the server’s port 
-python manage.py runserver 8080
-
-# If you want to change the server’s IP
-python manage.py runserver 0:8000
-# 0 is a shortcut for 0.0.0.0
-```
+Start a django project : `django-admin startproject <project_name> <dir_to_project_be_initialized> `
+Run Django server : `python manage.py runserver`
+Run Django server on specific port : `python manage.py runserver 8003`
+Run Django server with specific ip ßon specific port : `python manage.py runserver 0:8003`
+\
+Create django app : `python manage.py startapp polls`
 
 ___
 
-To create your app, make sure you’re in the same directory as manage.py and type this command:
-
-```
-python manage.py startapp polls
-```
-
-That’ll create a directory polls, which is laid out like below.\
-This directory structure will house the poll application.
-
-```
-polls/
-    __init__.py
-    admin.py
-    apps.py
-    migrations/
-        __init__.py
-    models.py
-    tests.py
-    views.py
-```
-
+### File definitions : 
 - `admin.py` : ???
 - `apps.py` : I'm not sure what is this.
 - `models.py`: To create models for the app.
 - `tests.py` : To write tests for the app.
 - `views.py` : To write views for the app.
-  
-  -   Each view is responsible for doing one of two things: 
-      -   returning an HttpResponse object containing the content for the requested page
-      -   raising an exception such as Http404.
-      - The rest is up to you.
-
-  - Your view can read records from a database, or not. 
-  - It can use a template system such as Django’s – or a third-party Python template system – or not. 
-  - It can generate a PDF file, output XML, create a ZIP file on the fly, anything you want, using whatever Python libraries you want.
-
-    **All Django wants is that HttpResponse. Or an exception.**
-
-
-
-To call the view, we need to map it to a URL - and for this we need a URLconf.To create a URLconf in the polls directory, create a file called urls.py.
-
 - `urls.py` : ???
+___
+  
+## Notes 
+-   Each view is responsible for doing one of two things: 
+    -   Returning an HttpResponse object containing the content for the requested page
+    -   Raising an exception such as Http404.
+    - The rest is up to you.
 
-> adding a shell.py file to the polls ap to testing purposes
-> Execute a Python script from the Django shell :\
-> `$ python manage.py shell < myscript.py`
+- Your view can read records from a database, or not. 
+
+- It can use a template system such as Django’s – or a third-party Python template system – or not. 
+
+- It can generate a PDF file, output XML, create a ZIP file on the fly, anything you want, using whatever Python libraries you want.
+
+- Adding a shell.py file to the polls ap to testing purposes
+    - Execute a Python script from the Django shell : `$ python manage.py shell < myscript.py`
 
 ___
 
@@ -100,16 +57,6 @@ ___
 > Django apps are “pluggable”: You can use an app in multiple projects, and you can distribute apps, because they don’t have to be tied to a given Django installation.
 
 To include the app in our project, we need to add a reference to its configuration class in the `INSTALLED_APPS` setting. The `PollsConfig` class is in the `polls/apps.py` file, so its dotted path is `'polls.apps.PollsConfig'`. Edit the `core/settings.py` file and add that dotted path to the `INSTALLED_APPS` setting. It’ll look like this:
-
-```
-INSTALLED_APPS = [
-    ...
-    'polls.apps.PollsConfig',
-    ...
-]
-
-# Now Django knows to include the polls app.
-```
 
 ### Handle Migrations
 
@@ -137,30 +84,6 @@ There are three main command runs with `manage.py` to handle migrations on djang
 
 ---
 
-### Introducing the Django Admin
-
-> Generating admin sites for your staff or clients to add, change, and delete content is tedious work that doesn’t require much creativity. For that reason, Django entirely automates creation of admin interfaces for models.\
-> **The admin isn’t intended to be used by site visitors. It’s for site managers.**
-
-First we'll alcreate an initial admin user named 'admin' with a password of '1'
-```
-python manage.py createsuperuser --email admin@example.com --username admin
-``` 
-
-**Make the poll app modifiable in the admin**
-
-Only one more thing to do:
-
-we need to tell the admin that Question objects have an admin interface. 
-
-To do this, open the `polls/admin.py` file, and edit it to look like this:
-
-```
-from django.contrib import admin
-from .models import Question
-
-admin.site.register(Question)
-```
 
 ## Templates
 
@@ -172,44 +95,13 @@ Django’s template system separates the design from Python by creating a templa
 > The default settings file configures a DjangoTemplates backend whose `APP_DIRS` option is set to `True`.\
 > By convention `DjangoTemplates` looks for a `“templates”` subdirectory in each of the `INSTALLED_APPS`.
 
->**Template namespacing**\
+**Template namespacing**\
 Now we might be able to get away with putting our templates directly in polls/templates.\
 > Django will choose the first template it finds whose name matches, and if you had a template with the same name in a different application, Django would be unable to distinguish between them.\
 > We need to be able to point Django at the right one, and the best way to ensure this is by namespacing them.\
 > That is, by putting those templates inside another directory named for the application itself.\
 > Within the templates directory you have just created, create another directory called polls, and within that create a file called index.html.
 
-
-
-<!-- 
-To use djangorestframework: Add 'rest_framework' to INSTALLED_APPS to settings.py of core project
-```
-INSTALLED_APPS = [
-    ...
-    'rest_framework',
-    ...
-]
-```
-
-create an tutorial app for djangorestframework
-```
-python manage.py startapp drfTutorial
-```
-after that we need to add  drfTutorial to INSTALLED_APPS to settings.py of core project as follow :
-```
-INSTALLED_APPS = [
-    ...
-    'drfTutorial.apps.DrftutorialConfig'
-    ...
-]
-```
-
-Now sync your database for the first time:
-```
-python manage.py migrate
-```
-
--->
 ## Static Files
 
 * First, create a directory called static in your app directory.
@@ -258,4 +150,31 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+```
+
+
+
+### Introducing the Django Admin
+
+> Generating admin sites for your staff or clients to add, change, and delete content is tedious work that doesn’t require much creativity. For that reason, Django entirely automates creation of admin interfaces for models.\
+> **The admin isn’t intended to be used by site visitors. It’s for site managers.**
+
+First we'll alcreate an initial admin user named 'admin' with a password of '1'
+```
+python manage.py createsuperuser --email admin@example.com --username admin
+``` 
+
+**Make the poll app modifiable in the admin**
+
+Only one more thing to do:
+
+we need to tell the admin that Question objects have an admin interface. 
+
+To do this, open the `polls/admin.py` file, and edit it to look like this:
+
+```
+from django.contrib import admin
+from .models import Question
+
+admin.site.register(Question)
 ```
