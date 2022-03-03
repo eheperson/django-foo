@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'bookStore.apps.BookstoreConfig',
     'todo.apps.TodoConfig',
+    'basics.apps.BasicsConfig',
+    'musical.apps.MusicalConfig',
 
     # drf apps
     'drfQuickStart.apps.DrfquickstartConfig',

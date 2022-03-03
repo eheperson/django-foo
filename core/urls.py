@@ -36,6 +36,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('bookstore/', include('bookStore.urls')),
     path('todo/', include('todo.urls')),
+    path('basics/', include('basics.urls')),
 
     # urls for drf aps
     path('', include('snippets.urls')),

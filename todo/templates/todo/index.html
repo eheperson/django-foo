@@ -1,0 +1,43 @@
+
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="list-group mt-3">
+    {% for todo in todos %}
+    <a href="#" class="list-group-item list-group-item-action border border-2 rounded-3 border-danger mt-2" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h3 class="mb-1">
+                {{todo.title }}
+            </h3>
+            <small>
+                {{todo.created_at}}
+            </small>
+        </div>
+        <p class="mb-1">
+            {{todo.description}}
+        </p>
+        <small>
+            <span> Priority : </span> {{todo.priority}}
+        </small>
+        <div>
+            <button type="button" class="btn btn-sm btn-primary" disabled>
+                Done
+            </button>
+            <button type="button" class="btn btn-sm btn-warning" disabled>
+                Postpone
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" disabled>
+                Cancel
+            </button>
+        </div>
+    </a>
+    {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

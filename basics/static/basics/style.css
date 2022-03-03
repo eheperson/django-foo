@@ -1,0 +1,6 @@
+
+body {
+    background: black url("images/background.gif") no-repeat center center fixed;
+    
+  background-size: cover;
+}

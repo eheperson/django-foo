@@ -1,0 +1,14 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'basics/style.css' %}">
+{% if latest_dummies_list %}
+    <ul>
+    {% for dummy in latest_dummies_list %}
+    <li style="color:white;">
+        {{ dummy }}
+    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

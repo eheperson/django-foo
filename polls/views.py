@@ -14,13 +14,13 @@ from .models import Question, Choice
 #     return HttpResponse("Hello, world. You're at the polls index.")
 
 # old 'index' view, uncommet to test and comment actual 'index' view
-# def index(request):
-#     """
-#         Write a view that actually do something
-#     """
-#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-#     output = ', '.join([q.question_text for q in latest_question_list])
-#     return HttpResponse(output)
+def index(request):
+    """
+        Write a view that actually do something
+    """
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
 
 def index(request):
     """

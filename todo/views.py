@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 import datetime
-from .models import *
+from todo.models import Todo
 # Create your views here.
 
-
-
-def elo(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+def index(request):
+    todos = Todo.objects.all()
+    context = {
+        "todos" : todos
+    }
+    return render(request,'todo/index.html',context=context)
 
 
 def submit(request):
